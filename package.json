@@ -1,0 +1,45 @@
+{
+  "name": "redux-time-machine",
+  "version": "1.0.0",
+  "description": "Convert your redux in a time machine. Basic to implement do-undo system in your application.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "ts-node node_modules/jasmine/bin/jasmine ./src/*spec.ts",
+    "build": "npm run lint && npm test && tsc",
+    "compile": "tsc",
+    "tsc:watch": "tsc --watch",
+    "docs": "typedoc --out docs src",
+    "lint": "tslint -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcorral/redux-time-machine.git"
+  },
+  "keywords": [
+    "redux",
+    "hub",
+    "node",
+    "state",
+    "undo-redo",
+    "history"
+  ],
+  "author": "Tomas Corral",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcorral/redux-time-machine/issues"
+  },
+  "homepage": "https://github.com/tcorral/redux-time-machine#readme",
+  "dependencies": {
+    "redux-hub": "^1.0.1",
+    "redux-undo": "^0.6.1"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.3.5",
+    "jasmine": "^3.3.1",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.12.1",
+    "typedoc": "^0.14.1",
+    "typescript": "^3.2.2"
+  }
+}
