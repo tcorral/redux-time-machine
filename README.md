@@ -20,7 +20,7 @@ $ npm install redux-time-machine --save
 
 ### ReduxTimeMachine API
 #### createTimeMachineNode
-This method is the responsible of creating a new node in (ReduxHub)[https://github.com/tcorral/redux-hub].
+This method is the responsible of creating a new node in [ReduxHub](https://github.com/tcorral/redux-hub).
 The node created allows you to redo, undo actions as well as jump to the past and to the future.
 
 > It's a generic method that can be configured to set the State and the Dispatchers interfaces.

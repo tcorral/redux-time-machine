@@ -1,6 +1,6 @@
 {
   "name": "redux-time-machine",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Convert your redux in a time machine. Basic to implement do-undo system in your application.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
