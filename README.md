@@ -280,7 +280,7 @@ The documentation generated can be found inside the **docs** folder.
 
 ## Build the source
 This library has been written using [TypeScript](http://typescriptlang.org).
-If you need to use it in your project but you are not working with TypeScript you can always to build the code using ```npm run build``` This command will *lint your code*, *run the tests* and *compile to TypeScript.
+If you need to use it in your project but you are not working with TypeScript you can always to build the code using ```npm run build``` This command will *lint your code*, *run the tests* and *compile* to TypeScript.
 
 ## Contributing
 
