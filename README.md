@@ -210,7 +210,7 @@ State before dispatching **jumpToPast**
 }
 ```
 
-Dispatching **undo**
+Dispatching **jumpToPast**
 
 ```javascript
 node.dispatchers.jumpToPast(0);
