@@ -96,12 +96,13 @@ The past value is an array where ReduxTimeMachine pushes every old state when pr
 The future value is an array where ReduxTimeMachine pushes every state if the user navigated back to a past value.
 
 ##### Initial Value
-```
+```javascript
 {
     test: 'test'
 }
 ```
 ##### On creating the ReduxTimeMachine node
+```javascript
 {
     test: {
         past: [],
@@ -109,6 +110,7 @@ The future value is an array where ReduxTimeMachine pushes every state if the us
         future: []
     }
 }
+```
 
 ### ReduxHub Node API
 [See ReduxHub Node API](https://github.com/tcorral/redux-hub#reduxhub-node-api)
