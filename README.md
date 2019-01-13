@@ -288,7 +288,7 @@ This project is maintained by a community of developers. Contributions are welco
 You can find ReduxTimeMachine on GitHub; feel free to start an issue or create a pull requests:<br>
 [https://github.com/tcorral/redux-time-machine](https://github.com/tcorral/redux-time-machine)
 
-For more information, read the [contribution guide](https://github.com/tcorral/redux-hub/blob/master/CONTRIBUTING.md).
+For more information, read the [contribution guide](https://github.com/tcorral/redux-time-machine/blob/master/CONTRIBUTING.md).
 
 ## License
 
