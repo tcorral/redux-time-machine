@@ -1,6 +1,6 @@
 {
   "name": "redux-time-machine",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0",
   "description": "Convert your redux in a time machine. Basic to implement do-undo system in your application.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/tcorral/redux-time-machine#readme",
   "dependencies": {
-    "redux-hub": "^1.0.1",
+    "redux-hub": "^2.0.0",
     "redux-undo": "^0.6.1",
     "uuid": "^3.3.2"
   },
