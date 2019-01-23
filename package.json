@@ -32,7 +32,8 @@
   "homepage": "https://github.com/tcorral/redux-time-machine#readme",
   "dependencies": {
     "redux-hub": "^1.0.1",
-    "redux-undo": "^0.6.1"
+    "redux-undo": "^0.6.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/jasmine": "^3.3.5",

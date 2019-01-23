@@ -1,35 +1,35 @@
 import { } from 'jasmine';
 import { AnyAction } from 'redux';
-import { IStateNode } from 'redux-hub';
+import { Hub, IStateNode } from 'redux-hub';
 
-import { createTimeMachineNode, IUndoActionCreators } from './index';
+import { IUndoActionCreators, StateHubTimeMachine } from './index';
 
 describe('redux-time-machine', () => {
     describe('createTimeMachineNode', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('createTimeMachineNode')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'createTimeMachineNode',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
                         test: 'test2',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('should return "test" as initial test value', (done) => {
@@ -41,27 +41,27 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('dispatching')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'dispatching',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
                         test: 'test2',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('should return "test2" as test value on dispatching "test" action', (done) => {
@@ -74,27 +74,27 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('undo')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'undo',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
                         test: 'test2',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('undo should set test state to "test"', () => {
@@ -107,27 +107,27 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('redo')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'redo',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
                         test: 'test2',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('redo should set test state to "test2"', () => {
@@ -141,20 +141,22 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; test2: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('jumpToPast1')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
                 test2: () => ({
                     type: 'TEST2',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToPast1',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
@@ -167,10 +169,8 @@ describe('redux-time-machine', () => {
                         test: 'test3',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('jumpToPast index 0 should return "test"', () => {
@@ -184,20 +184,22 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; test2: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('jumpToPast2')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
                 test2: () => ({
                     type: 'TEST2',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToPast2',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
@@ -210,10 +212,8 @@ describe('redux-time-machine', () => {
                         test: 'test3',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('jumpToPast index 1 should return "test2"', () => {
@@ -227,20 +227,21 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; test2: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('jumpToFuture1')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
                 test2: () => ({
                     type: 'TEST2',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToFuture1',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
@@ -253,10 +254,8 @@ describe('redux-time-machine', () => {
                         test: 'test3',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('jumpToFuture index 1 should return "test3"', () => {
@@ -271,8 +270,11 @@ describe('redux-time-machine', () => {
         interface ITestState { test: string; }
         interface ITestDispatchers { test: any; test2: any; test3: any; }
         let timeMachineNode: IStateNode<ITestState, ITestDispatchers & IUndoActionCreators>;
-        const config = {
-            actionCreators: {
+
+        beforeEach(() => {
+            timeMachineNode = new StateHubTimeMachine<ITestState, ITestDispatchers, Hub, {}>()
+            .node('jumpToFuture2')
+            .set('actions', {
                 test: () => ({
                     type: 'TEST',
                 }),
@@ -282,12 +284,11 @@ describe('redux-time-machine', () => {
                 test3: () => ({
                     type: 'TEST3',
                 }),
-            },
-            initialState: {
+            })
+            .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToFuture2',
-            reducers: {
+            })
+            .set('reducers', {
                 TEST: (state: any, action: AnyAction) => {
                     return {
                         ...state,
@@ -306,10 +307,8 @@ describe('redux-time-machine', () => {
                         test: 'test4',
                     };
                 },
-            },
-        };
-        beforeEach(() => {
-            timeMachineNode = createTimeMachineNode<ITestState, ITestDispatchers>(config);
+            })
+            .create();
         });
 
         it('jumpToFuture index 2 should return "test4"', () => {
