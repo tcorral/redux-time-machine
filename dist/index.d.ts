@@ -1,4 +1,4 @@
-import { IActionCreators, IReducers } from 'redux-hub';
+import { Hub, INodeApiComplete, StateHub } from 'redux-hub';
 import { ActionTypes } from 'redux-undo';
 export interface IUndoActionCreators {
     undo: () => {
@@ -21,11 +21,7 @@ export interface IUndoable<State> {
     present: State;
     future: State[];
 }
-export declare const createTimeMachineNode: <State, Dispatchers>(config: {
-    name: string;
-    reducers: IReducers;
-    actionCreators?: IActionCreators | {
-        ActionCreators: IUndoActionCreators;
-    } | undefined;
-    initialState?: State | undefined;
-}) => import("redux-hub").IStateNode<State, Dispatchers & IUndoActionCreators>;
+export declare class StateHubTimeMachine<State, Dispatchers, model, result> extends StateHub<State, Dispatchers, Hub, {}> {
+    private state;
+    node: (scopeName?: string) => INodeApiComplete<State, Dispatchers & IUndoActionCreators, model, result>;
+}

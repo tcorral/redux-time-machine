@@ -15,24 +15,23 @@ var index_1 = require("./index");
 describe('redux-time-machine', function () {
     describe('createTimeMachineNode', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('createTimeMachineNode')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'createTimeMachineNode',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('should return "test" as initial test value', function (done) {
             expect(timeMachineNode.getState().test).toEqual('test');
@@ -41,24 +40,23 @@ describe('redux-time-machine', function () {
     });
     describe('dispatching', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('dispatching')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'dispatching',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('should return "test2" as test value on dispatching "test" action', function (done) {
             timeMachineNode.dispatchers.test();
@@ -68,24 +66,23 @@ describe('redux-time-machine', function () {
     });
     describe('undo', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('undo')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'undo',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('undo should set test state to "test"', function () {
             timeMachineNode.dispatchers.test();
@@ -95,24 +92,23 @@ describe('redux-time-machine', function () {
     });
     describe('redo', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('redo')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'redo',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('redo should set test state to "test2"', function () {
             timeMachineNode.dispatchers.test();
@@ -123,30 +119,29 @@ describe('redux-time-machine', function () {
     });
     describe('jumpToPast index 0', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('jumpToPast1')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
                 test2: function () { return ({
                     type: 'TEST2',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToPast1',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
                 TEST2: function (state, action) {
                     return __assign({}, state, { test: 'test3' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('jumpToPast index 0 should return "test"', function () {
             timeMachineNode.dispatchers.test();
@@ -157,30 +152,29 @@ describe('redux-time-machine', function () {
     });
     describe('jumpToPast index 1', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('jumpToPast2')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
                 test2: function () { return ({
                     type: 'TEST2',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToPast2',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
                 TEST2: function (state, action) {
                     return __assign({}, state, { test: 'test3' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('jumpToPast index 1 should return "test2"', function () {
             timeMachineNode.dispatchers.test();
@@ -191,30 +185,29 @@ describe('redux-time-machine', function () {
     });
     describe('jumpToFuture index 1', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('jumpToFuture1')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
                 test2: function () { return ({
                     type: 'TEST2',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToFuture1',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
                 TEST2: function (state, action) {
                     return __assign({}, state, { test: 'test3' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('jumpToFuture index 1 should return "test3"', function () {
             timeMachineNode.dispatchers.test();
@@ -226,8 +219,10 @@ describe('redux-time-machine', function () {
     });
     describe('jumpToFuture index 2', function () {
         var timeMachineNode;
-        var config = {
-            actionCreators: {
+        beforeEach(function () {
+            timeMachineNode = new index_1.StateHubTimeMachine()
+                .node('jumpToFuture2')
+                .set('actions', {
                 test: function () { return ({
                     type: 'TEST',
                 }); },
@@ -237,12 +232,11 @@ describe('redux-time-machine', function () {
                 test3: function () { return ({
                     type: 'TEST3',
                 }); },
-            },
-            initialState: {
+            })
+                .set('state', {
                 test: 'test',
-            },
-            name: 'jumpToFuture2',
-            reducers: {
+            })
+                .set('reducers', {
                 TEST: function (state, action) {
                     return __assign({}, state, { test: 'test2' });
                 },
@@ -252,10 +246,8 @@ describe('redux-time-machine', function () {
                 TEST3: function (state, action) {
                     return __assign({}, state, { test: 'test4' });
                 },
-            },
-        };
-        beforeEach(function () {
-            timeMachineNode = index_1.createTimeMachineNode(config);
+            })
+                .create();
         });
         it('jumpToFuture index 2 should return "test4"', function () {
             timeMachineNode.dispatchers.test();

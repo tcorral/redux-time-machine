@@ -18,70 +18,27 @@ $ npm install redux-time-machine --save
 
 ## Usage
 
-### ReduxTimeMachine API
-#### createTimeMachineNode
-This method is the responsible of creating a new node in [ReduxHub](https://github.com/tcorral/redux-hub).
-The node created allows you to redo, undo actions as well as jump to the past and to the future.
+### ReduxTimeMachine
+-------
+### StateHubTimeMachine class api
+ReduxTimeMachine provides you with a class to instanciate your time machine hub node.
+> StateHubTimeMachine is a [Generic class](https://www.typescriptlang.org/docs/handbook/generics.html) and can be configured in advance so [TypeScript](https://www.typescriptlang.org) can provide the right information.
 
-> It's a generic method that can be configured to set the State and the Dispatchers interfaces.
+#### Generics
+On creating an instance of StateHub you need to provide the following Generics:
 
-#### Node Configuration
-On creating a node we need to provide a configuration so it can execute the reducers on dispatching actions.
+1. State - Provide your state interface.
+2. Dispatchers - Provide your dispatchers interface.
+3. HubModel - Provide the Hub model interface.
+4. Result - Empty object where the node builder will store the used methods.
 
-```javascript
-{
-    name: 'nodeName',
-    reducers: {
-        TEST: (state: any, action: AnyAction) => {
-            return {
-                ...state,
-                test: 'test',
-            };
-        }
-    },
-    initialState: {
-        test: 'test'
-    },
-    actionCreators: {
-        test: () => ({
-            type: 'TEST',
-        })
-    }
-}
+```typescript
+import { StateHubTimeMachine } from 'redux-time-machine';
+
+const stateHubTimeMachine = new StateHubTimeMachine<State, Dispatchers, Hub, {}>();
 ```
 
-#### Create a ReduxTimeMachine Node
-
-```javascript
-const node = stateHub.createTimeMachineNode<State, Dispatchers>({
-    name: 'nodeName',
-    reducers: {
-        TEST: (state: any, action: AnyAction) => {
-            return {
-                ...state,
-                test: 'test',
-            };
-        },
-        TEST2: (state: any, action: AnyAction) => {
-            return {
-                ...state,
-                test: 'test2',
-            };
-        },
-    },
-    initialState: {
-        test: 'test'
-    },
-    actionCreators: {
-        test: () => ({
-            type: 'TEST',
-        }),
-        test2: () => ({
-            type: 'TEST2',
-        }),
-    }
-});
-```
+For more information [see ReduxHub Node API](https://github.com/tcorral/redux-hub#reduxhub-node-api)
 
 ### How ReduxTimeMachine works.
 ReduxTimeMachine abstracts the way to store the past, present and future values.
