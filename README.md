@@ -38,7 +38,8 @@ import { StateHubTimeMachine } from 'redux-time-machine';
 const stateHubTimeMachine = new StateHubTimeMachine<State, Dispatchers, Hub, {}>();
 ```
 
-For more information [see ReduxHub Node API](https://github.com/tcorral/redux-hub#reduxhub-node-api)
+For more information [see StateHub Node API](https://github.com/tcorral/redux-hub#statehub-instance-api)
+
 
 ### How ReduxTimeMachine works.
 ReduxTimeMachine abstracts the way to store the past, present and future values.
@@ -69,8 +70,8 @@ The future value is an array where ReduxTimeMachine pushes every state if the us
 }
 ```
 
-### StateHub Node API
-[See StateHub Node API](https://github.com/tcorral/redux-hub#statehub-instance-api)
+### ReduxHub Node API
+[See ReduxHub Node API](https://github.com/tcorral/redux-hub#statehub-instance-api)
 
 #### dispatchers
 In addition to the dispatchers created as a ReduxHub Node, ReduxTimeMachine has other predefined actions to navigate backwards and forwards over the state.
