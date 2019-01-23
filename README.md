@@ -69,8 +69,8 @@ The future value is an array where ReduxTimeMachine pushes every state if the us
 }
 ```
 
-### ReduxHub Node API
-[See ReduxHub Node API](https://github.com/tcorral/redux-hub#reduxhub-node-api)
+### StateHub Node API
+[See StateHub Node API](https://github.com/tcorral/redux-hub#statehub-instance-api)
 
 #### dispatchers
 In addition to the dispatchers created as a ReduxHub Node, ReduxTimeMachine has other predefined actions to navigate backwards and forwards over the state.
